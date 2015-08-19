@@ -6,6 +6,11 @@ class Ecell4 < Formula
 
   depends_on "cmake" => :build
 
+  resource "cython" do
+    url "http://cython.org/release/Cython-0.23.tar.gz"
+    sha256 "9fd01e8301c24fb3ba0411ad8eb16f5d9f9f8e66b1281fbe7aba2a9bd9d343dc"
+  end
+
   def install
     args = %W[
       .
@@ -15,6 +20,16 @@ class Ecell4 < Formula
     system "cmake", *args
     system "make"
     system "make", "install"
+
+    resource("cython").stage do
+      system "python", *Language::Python.setup_install_args(buildpath/"vendor")
+    end
+    ENV.prepend_path "PYTHONPATH", buildpath/"vendor/lib/python2.7/site-packages"
+
+    cd "python" do
+      system "python", "setup.py", "build_ext", "-L#{prefix}/lib", "-I#{prefix}/include"
+    end
+
   end
 
 end
