@@ -5,6 +5,9 @@ class Ecell4 < Formula
   sha256 "16b97620ac15d249318bccd0c23001b8ff381c74660f6a924fd437eb726997a8"
 
   depends_on "cmake" => :build
+  depends_on "gsl"
+  depends_on "boost"
+  depends_on "homebrew/science/hdf5"
 
   resource "cython" do
     url "http://cython.org/release/Cython-0.23.tar.gz"
