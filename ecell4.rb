@@ -21,8 +21,7 @@ class Ecell4 < Formula
     ]
 
     system "cmake", *args
-    system "make"
-    system "make", "install"
+    system "make", "BesselTables"
 
     resource("cython").stage do
       system "python", *Language::Python.setup_install_args(buildpath/"vendor")
@@ -30,7 +29,9 @@ class Ecell4 < Formula
     ENV.prepend_path "PYTHONPATH", buildpath/"vendor/lib/python2.7/site-packages"
 
     cd "python" do
-      system "python", "setup.py", "build_ext", "-L#{prefix}/lib", "-I#{prefix}/include"
+      ENV.prepend_create_path "PYTHONPATH", libexec/"lib/python2.7/site-packages"
+      system "python", "setup.py", "build_ext"
+      system "python", *Language::Python.setup_install_args(libexec)
     end
 
   end
