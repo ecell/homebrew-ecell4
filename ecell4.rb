@@ -3,6 +3,8 @@ class Ecell4 < Formula
   homepage "https://github.com/ecell/ecell4"
   url "http://dev.e-cell.org/downloads/ecell-4.0.0.zip"
   sha256 "16b97620ac15d249318bccd0c23001b8ff381c74660f6a924fd437eb726997a8"
+  
+  head "https://github.com/ecell/ecell4.git"
 
   depends_on "cmake" => :build
   depends_on "gsl"
@@ -10,8 +12,8 @@ class Ecell4 < Formula
   depends_on "homebrew/science/hdf5"
 
   resource "cython" do
-    url "http://cython.org/release/Cython-0.23.tar.gz"
-    sha256 "9fd01e8301c24fb3ba0411ad8eb16f5d9f9f8e66b1281fbe7aba2a9bd9d343dc"
+    url "http://cython.org/release/Cython-0.23.2.zip"
+    sha256 "ca376b20b40312f70d4d19d79fc00909f591f1b2cc11c26eeccd17abfbdd7562"
   end
 
   def install
