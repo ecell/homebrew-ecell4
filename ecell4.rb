@@ -23,6 +23,7 @@ class Ecell4 < Formula
     ]
 
     system "cmake", *args
+    system "cat", "ecell4/core/config.h"
     system "make", "BesselTables"
 
     resource("cython").stage do
