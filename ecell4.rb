@@ -1,8 +1,10 @@
+# prerequisites
+# apt-get install python-setuptools python-dev
 class Ecell4 < Formula
   desc "A multi-algorithm, multi-timescale biochemical simulation environment"
   homepage "https://github.com/ecell/ecell4"
-  url "http://dev.e-cell.org/downloads/ecell-4.0.0.zip"
-  sha256 "16b97620ac15d249318bccd0c23001b8ff381c74660f6a924fd437eb726997a8"
+  url "http://dev.e-cell.org/downloads/ecell4.zip"
+  sha256 "bdbd8f406e230cbb2d566b9795bdfd3953cda67160d186bd0ca8ed8a3cf604b4"
 
   head "https://github.com/ecell/ecell4.git"
 
@@ -10,6 +12,7 @@ class Ecell4 < Formula
   depends_on "gsl"
   depends_on "boost"
   depends_on "homebrew/science/hdf5"
+  depends_on "pkg-config"
 
   resource "cython" do
     url "http://cython.org/release/Cython-0.23.4.zip"
@@ -21,6 +24,7 @@ class Ecell4 < Formula
       .
       -DCMAKE_INSTALL_PREFIX=#{prefix}
     ]
+    ENV["CPATH"] = "#{HOMEBREW_PREFIX}/include:#{buildpath}"
 
     system "cmake", *args
     system "cat", "ecell4/core/config.h"
