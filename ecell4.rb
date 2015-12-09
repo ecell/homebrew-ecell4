@@ -14,12 +14,15 @@ class Ecell4 < Formula
   sha256 "bdbd8f406e230cbb2d566b9795bdfd3953cda67160d186bd0ca8ed8a3cf604b4"
 
   head "https://github.com/ecell/ecell4.git"
+  
+  option "with-python3", "Build python3 bindings"
 
   depends_on "cmake" => :build
   depends_on "gsl"
   depends_on "boost"
   depends_on "homebrew/science/hdf5"
   depends_on "pkg-config"
+  depends_on :python3 => :optional
 
   resource "cython" do
     url "http://cython.org/release/Cython-0.23.4.zip"
@@ -36,18 +39,37 @@ class Ecell4 < Formula
     system "cmake", *args
     system "cat", "ecell4/core/config.h"
     system "make", "BesselTables"
+    
+    if build.with? "python3"
 
-    resource("cython").stage do
-      system "python", *Language::Python.setup_install_args(buildpath/"vendor")
-    end
-    ENV.prepend_path "PYTHONPATH", buildpath/"vendor/lib/python2.7/site-packages"
-    # centos needs lib64 path
-    ENV.prepend_path "PYTHONPATH", buildpath/"vendor/lib64/python2.7/site-packages"
+      resource("cython").stage do
+        system "python3", *Language::Python.setup_install_args(buildpath/"vendor")
+      end
+      ENV.prepend_path "PYTHONPATH", buildpath/"vendor/lib/python3.5/site-packages"
+      # centos needs lib64 path
+      ENV.prepend_path "PYTHONPATH", buildpath/"vendor/lib64/python3.5/site-packages"
+  
+      cd "python" do
+        ENV.prepend_create_path "PYTHONPATH", libexec/"lib/python3.5/site-packages"
+        system "python3", "setup.py", "build_ext"
+        system "python3", *Language::Python.setup_install_args(libexec)
+      end
+    
+    else
 
-    cd "python" do
-      ENV.prepend_create_path "PYTHONPATH", libexec/"lib/python2.7/site-packages"
-      system "python", "setup.py", "build_ext"
-      system "python", *Language::Python.setup_install_args(libexec)
+      resource("cython").stage do
+        system "python", *Language::Python.setup_install_args(buildpath/"vendor")
+      end
+      ENV.prepend_path "PYTHONPATH", buildpath/"vendor/lib/python2.7/site-packages"
+      # centos needs lib64 path
+      ENV.prepend_path "PYTHONPATH", buildpath/"vendor/lib64/python2.7/site-packages"
+  
+      cd "python" do
+        ENV.prepend_create_path "PYTHONPATH", libexec/"lib/python2.7/site-packages"
+        system "python", "setup.py", "build_ext"
+        system "python", *Language::Python.setup_install_args(libexec)
+      end
+    
     end
 
   end
