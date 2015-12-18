@@ -11,7 +11,7 @@ class Ecell4 < Formula
   desc "A multi-algorithm, multi-timescale biochemical simulation environment"
   homepage "https://github.com/ecell/ecell4"
   url "http://dev.e-cell.org/downloads/ecell4-develop.zip"
-  sha256 "767246ecf58293197fbc9cfaed4e06f24a8dc46a80cce966b951d4f0145e5d19"
+  sha256 "78d9ad3c6580efc26ed57328c370fbec78ad74c20ac6a0457c3ddd51482a88b2"
 
   head "https://github.com/ecell/ecell4.git"
   
