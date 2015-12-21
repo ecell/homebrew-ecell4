@@ -37,6 +37,6 @@ brew install ecell4
 ## how to import ecell4 in Python interactive shell
 
 ```
-PYTHONPATH=`brew --prefix`/Cellar/ecell4/develop/libexec/lib/python2.7/site-packages python
+python
 >>> from ecell4 import *
 ```
