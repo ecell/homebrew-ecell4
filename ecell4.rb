@@ -50,9 +50,9 @@ class Ecell4 < Formula
       ENV.prepend_path "PYTHONPATH", buildpath/"vendor/lib64/python3.5/site-packages"
   
       cd "python" do
-        ENV.prepend_create_path "PYTHONPATH", libexec/"lib/python3.5/site-packages"
+        ENV.prepend_create_path "PYTHONPATH", prefix/"lib/python3.5/site-packages"
         system "python3", "setup.py", "build_ext"
-        system "python3", *Language::Python.setup_install_args(libexec)
+        system "python3", *Language::Python.setup_install_args(prefix)
       end
     
     else
@@ -65,9 +65,9 @@ class Ecell4 < Formula
       ENV.prepend_path "PYTHONPATH", buildpath/"vendor/lib64/python2.7/site-packages"
   
       cd "python" do
-        ENV.prepend_create_path "PYTHONPATH", libexec/"lib/python2.7/site-packages"
+        ENV.prepend_create_path "PYTHONPATH", prefix/"lib/python2.7/site-packages"
         system "python", "setup.py", "build_ext"
-        system "python", *Language::Python.setup_install_args(libexec)
+        system "python", *Language::Python.setup_install_args(prefix)
       end
     
     end
