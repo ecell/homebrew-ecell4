@@ -9,4 +9,4 @@ before_install:
 - brew update; brew upgrade; brew tap ecell/ecell4; brew install ecell4
 
 script:
-- python -c "from ecell4 import *"
+- mkdir -p /Users/travis/Library/Python/2.7/lib/python/site-packages; echo 'import site; site.addsitedir("/usr/local/lib/python2.7/site-packages")' >> /Users/travis/Library/Python/2.7/lib/python/site-packages/homebrew.pth; python -c "from ecell4 import *"
