@@ -1,0 +1,9 @@
+language: cpp
+os:
+- osx
+
+compiler:
+- clang
+
+before_install:
+- brew update; brew upgrade; brew tap ecell/ecell4; brew install ecell4
