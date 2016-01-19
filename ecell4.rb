@@ -22,6 +22,7 @@ class Ecell4 < Formula
   depends_on "boost"
   depends_on "homebrew/science/hdf5"
   depends_on "pkg-config"
+  depends_on "ffmpeg"
   depends_on :python3 => :optional
 
   resource "cython" do
