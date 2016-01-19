@@ -8,21 +8,20 @@
 # yum install python-setuptools python-devel
 
 class Ecell4 < Formula
-  desc "A multi-algorithm, multi-timescale biochemical simulation environment"
+  desc "Multi algorithm-timescale bio-simulation environment"
   homepage "https://github.com/ecell/ecell4"
   url "http://dev.e-cell.org/downloads/ecell4-ff3fef040dfa46656156160d4006c3836f97550b.zip"
   sha256 "8fafe0c42996c5a1997371b4808c71d52de0600a8ab971332f891f1f2161f504"
 
   head "https://github.com/ecell/ecell4.git"
-  
   option "with-python3", "Build python3 bindings"
 
   depends_on "cmake" => :build
   depends_on "gsl"
   depends_on "boost"
   depends_on "homebrew/science/hdf5"
-  depends_on "pkg-config"
-  depends_on "ffmpeg"
+  depends_on "pkg-config" => :build
+  depends_on "ffmpeg" => %w[with-libvpx with-libvorbis]
   depends_on :python3 => :optional
 
   resource "cython" do
@@ -40,7 +39,6 @@ class Ecell4 < Formula
     system "cmake", *args
     system "cat", "ecell4/core/config.h"
     system "make", "BesselTables"
-    
     if build.with? "python3"
 
       resource("cython").stage do
@@ -49,13 +47,11 @@ class Ecell4 < Formula
       ENV.prepend_path "PYTHONPATH", buildpath/"vendor/lib/python3.5/site-packages"
       # centos needs lib64 path
       ENV.prepend_path "PYTHONPATH", buildpath/"vendor/lib64/python3.5/site-packages"
-  
       cd "python" do
         ENV.prepend_create_path "PYTHONPATH", prefix/"lib/python3.5/site-packages"
         system "python3", "setup.py", "build_ext"
         system "python3", *Language::Python.setup_install_args(prefix)
       end
-    
     else
 
       resource("cython").stage do
@@ -64,15 +60,11 @@ class Ecell4 < Formula
       ENV.prepend_path "PYTHONPATH", buildpath/"vendor/lib/python2.7/site-packages"
       # centos needs lib64 path
       ENV.prepend_path "PYTHONPATH", buildpath/"vendor/lib64/python2.7/site-packages"
-  
       cd "python" do
         ENV.prepend_create_path "PYTHONPATH", prefix/"lib/python2.7/site-packages"
         system "python", "setup.py", "build_ext"
         system "python", *Language::Python.setup_install_args(prefix)
       end
-    
     end
-
   end
-
 end
