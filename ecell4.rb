@@ -11,7 +11,7 @@ class Ecell4 < Formula
   desc "Multi algorithm-timescale bio-simulation environment"
   homepage "https://github.com/ecell/ecell4"
   url "https://github.com/ecell/ecell4/archive/4.0.0.zip"
-  sha256 "59b4d6038e9c5a7580b44d460a96266dbf2b5ecd7dca2266fbe493efa458cca7"
+  sha256 "64e20b2acff95690ce6dfb262e3b1596e6c33086f76380a4549ee72e60d0a204"
 
   head "https://github.com/ecell/ecell4.git"
   option "with-python3", "Build python3 bindings"
