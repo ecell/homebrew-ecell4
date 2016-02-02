@@ -17,8 +17,8 @@ class Ecell4 < Formula
   option "with-python3", "Build python3 bindings"
 
   depends_on "cmake" => :build
-  depends_on "gsl"
-  depends_on "boost"
+  depends_on "gsl" => :build
+  depends_on "homebrew/versions/boost155" => :build
   depends_on "homebrew/science/hdf5"
   depends_on "pkg-config" => :build
   depends_on "ffmpeg" => %w[with-libvpx with-libvorbis]
