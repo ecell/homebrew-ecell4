@@ -7,6 +7,10 @@ homebrew-ecell4
 ruby -e "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/master/install)"
 brew tap ecell/ecell4
 brew install ecell4
+
+# path config for homebrew-ecell4
+mkdir -p ~/Library/Python/2.7/lib/python/site-packages
+echo 'import site; site.addsitedir("/usr/local/lib/python2.7/site-packages")' >> ~/Library/Python/2.7/lib/python/site-packages/homebrew.pth
 ```
 
 ## Ubuntu Linux
