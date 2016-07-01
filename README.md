@@ -1,6 +1,8 @@
 homebrew-ecell4
 ===============
 
+This project is NOT maintained now. Please use `pip install ecell` to install E-Cell4 on Mac or Linux.
+------------------------------------------------------------------------------------------------------
 ## Mac OS X
 
 ```shell
